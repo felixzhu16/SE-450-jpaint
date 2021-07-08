@@ -50,7 +50,7 @@ public class MouseListener extends MouseAdapter {
         DrawShapeCommand draw = new DrawShapeCommand(start, end, g, IapplicationState, paintCanvasBase);
         draw.run();
         array.add(draw.returnshape());
-        ShapeList.giveList(array);
+        ShapeList.giveSList(array);
         paintCanvasBase.repaint();
     }
 

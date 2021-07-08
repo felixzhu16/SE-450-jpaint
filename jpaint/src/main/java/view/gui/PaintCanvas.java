@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 
 public class PaintCanvas extends PaintCanvasBase {
-    private static PaintCanvas paintcanvas = new PaintCanvas();
     public Graphics2D getGraphics2D() {
         return (Graphics2D)getGraphics();
     }
@@ -33,8 +32,9 @@ public class PaintCanvas extends PaintCanvasBase {
      */
     public void paint(Graphics g) {
         ArrayList<IShape> canvasShapes = ShapeList.getCurrList();
-        super.paint(g);
         Graphics2D graphics2D = (Graphics2D) g;
+        ShapeList.setG(graphics2D);
+        super.paint(g);
         paintList(canvasShapes, graphics2D); //paints the list of shapes we have drawn
         System.out.println("Time to repaint");
     }
