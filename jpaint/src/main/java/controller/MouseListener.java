@@ -24,11 +24,11 @@ public class MouseListener extends MouseAdapter {
     private ShapeList shapelist;
     private ArrayList<IShape> array = new ArrayList<IShape>();
 
-    public MouseListener(PaintCanvasBase pCB, IApplicationState aS){
+    public MouseListener(PaintCanvasBase pCB, IApplicationState aS, ShapeList shapelist){
         this.paintCanvasBase = pCB;
         this.IapplicationState = aS;
         this.g = pCB.getGraphics2D();
-        this.shapelist = new ShapeList();
+        this.shapelist = shapelist;
     }
 
 
@@ -50,7 +50,7 @@ public class MouseListener extends MouseAdapter {
         DrawShapeCommand draw = new DrawShapeCommand(start, end, g, IapplicationState, paintCanvasBase);
         draw.run();
         array.add(draw.returnshape());
-        ShapeList.giveSList(array);
+        shapelist.giveSList(array);
         paintCanvasBase.repaint();
     }
 

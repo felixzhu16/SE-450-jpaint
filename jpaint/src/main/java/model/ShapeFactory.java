@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class ShapeFactory {
-    public IShape drawShape(ShapeType shapeType, Point start, Point end, ShapeColor color, Graphics2D g){
+    public IShape drawShape(ShapeType shapeType, Point start, Point end, ShapeColor color){
         IShape shape = null;
         switch(shapeType){
             case RECTANGLE:

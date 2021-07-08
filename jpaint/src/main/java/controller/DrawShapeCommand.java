@@ -30,7 +30,7 @@ public class DrawShapeCommand{
 
     public void run(){
         ShapeFactory shapeFact = new ShapeFactory();
-        this.shape = shapeFact.drawShape(shapetype,start,end,color,g);
+        this.shape = shapeFact.drawShape(shapetype,start,end,color);
     }
     public IShape returnshape(){
         return shape;

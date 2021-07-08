@@ -12,6 +12,10 @@ import java.util.ArrayList;
 
 
 public class PaintCanvas extends PaintCanvasBase {
+    private ShapeList shapelist;
+    public PaintCanvas(ShapeList shapeList){
+        this.shapelist = shapeList;
+    }
     public Graphics2D getGraphics2D() {
         return (Graphics2D)getGraphics();
     }
@@ -31,10 +35,9 @@ public class PaintCanvas extends PaintCanvasBase {
      * It you want to force a paint event, call aPaintCanvas.repaint()
      */
     public void paint(Graphics g) {
-        ArrayList<IShape> canvasShapes = ShapeList.getCurrList();
-        Graphics2D graphics2D = (Graphics2D) g;
-        ShapeList.setG(graphics2D);
         super.paint(g);
+        ArrayList<IShape> canvasShapes = shapelist.getCurrList();
+        Graphics2D graphics2D = (Graphics2D) g;
         paintList(canvasShapes, graphics2D); //paints the list of shapes we have drawn
         System.out.println("Time to repaint");
     }

@@ -4,6 +4,7 @@ import controller.IJPaintController;
 import controller.JPaintController;
 import controller.MouseListener;
 import model.ShapeColor;
+import model.ShapeList;
 import model.ShapeType;
 import model.persistence.ApplicationState;
 import view.gui.Gui;
@@ -19,12 +20,14 @@ import java.util.EnumMap;
 
 public class Main {
     public static void main(String[] args){
-        PaintCanvasBase paintCanvas = new PaintCanvas();
+        ShapeList shapeList = new ShapeList();
+        PaintCanvasBase paintCanvas = new PaintCanvas(shapeList);
         IGuiWindow guiWindow = new GuiWindow(paintCanvas);
         IUiModule uiModule = new Gui(guiWindow);
         ApplicationState appState = new ApplicationState(uiModule);
-        IJPaintController controller = new JPaintController(uiModule, appState);
-        MouseListener mouseListener = new MouseListener(paintCanvas, appState);
+
+        IJPaintController controller = new JPaintController(uiModule, appState, shapeList, paintCanvas);
+        MouseListener mouseListener = new MouseListener(paintCanvas, appState, shapeList);
         paintCanvas.addMouseListener(mouseListener);
         controller.setup();
 

@@ -1,15 +1,10 @@
 package model.persistence;
 
-import controller.UndoAndRedoCommand;
 import model.*;
 import model.dialogs.DialogProvider;
 import model.interfaces.IApplicationState;
 import model.interfaces.IDialogProvider;
-import model.interfaces.IShape;
 import view.interfaces.IUiModule;
-
-import java.awt.*;
-import java.util.ArrayList;
 
 public class ApplicationState implements IApplicationState {
     private final IUiModule uiModule;
@@ -22,7 +17,6 @@ public class ApplicationState implements IApplicationState {
     private MouseMode activeMouseMode;
     private Undo activeUndo;
     private Redo activeRedo;
-    private UndoAndRedoCommand UndoAndRedo = new UndoAndRedoCommand();
 
 
     public ApplicationState(IUiModule uiModule) {
