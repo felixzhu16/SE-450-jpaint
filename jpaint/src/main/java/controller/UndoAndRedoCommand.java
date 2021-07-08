@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class UndoAndRedoCommand {
     private static ArrayList<IShape> shapeList = new ArrayList<>();
     private static ArrayList<IShape> removedList = new ArrayList<>();
-    private static PaintCanvasBase paintcanvas = new PaintCanvas();
+    private static PaintCanvas paintcanvas = new PaintCanvas();
     public static void undo(){
         shapeList = ShapeList.getCurrList();
         removedList = ShapeList.getRemList();
@@ -23,17 +23,16 @@ public class UndoAndRedoCommand {
             shapeList.remove(shapeList.size()-1);
             ShapeList.giveSList(shapeList);
             ShapeList.giveRList(removedList);
-            System.out.println("Size after undo: " + shapeList.size());
             paintcanvas.repaint();
+            System.out.println("Size after undo: " + shapeList.size());
         }
-
     }
 
     public static void redo(){
         shapeList = ShapeList.getCurrList();
         removedList = ShapeList.getRemList();
         if(!removedList.isEmpty()){ //If we haven't undone anything this would be empty/nothing to redo
-            System.out.println("ReDO COMMAND TEST: " + shapeList.size());
+            System.out.println("REDO COMMAND TEST: " + shapeList.size());
             shapeList.add(removedList.get(removedList.size()-1));
             removedList.remove(removedList.size() - 1);
             ShapeList.giveSList(shapeList);
