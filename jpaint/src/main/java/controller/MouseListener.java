@@ -1,5 +1,6 @@
 package controller;
 
+import model.ShapeInfo;
 import model.ShapeList;
 import model.interfaces.IApplicationState;
 import model.interfaces.IShape;
@@ -18,22 +19,25 @@ public class MouseListener extends MouseAdapter {
     private Point start;
     private Point end;
     private PaintCanvasBase paintCanvasBase;
-    private IApplicationState IapplicationState;
+    private IApplicationState appstate;
     private MouseMode mMode = MouseMode.DRAW;
     private Graphics2D g;
     private ShapeList shapelist;
+    private ShapeInfo shapeInfo;
     private ArrayList<IShape> array = new ArrayList<IShape>();
 
-    public MouseListener(PaintCanvasBase pCB, IApplicationState aS, ShapeList shapelist){
+    public MouseListener(PaintCanvasBase pCB, IApplicationState aS, ShapeList shapelist, ShapeInfo shapeInfo){
         this.paintCanvasBase = pCB;
-        this.IapplicationState = aS;
+        this.appstate = aS;
         this.g = pCB.getGraphics2D();
         this.shapelist = shapelist;
+        this.shapeInfo = shapeInfo;
     }
 
 
     @Override
     public void mousePressed(MouseEvent e){
+        appstate.setStart(e.getPoint());
         this.start = e.getPoint();
         double x = this.start.getX();
         double y = this.start.getY();
@@ -42,12 +46,14 @@ public class MouseListener extends MouseAdapter {
     }
     @Override
     public void mouseReleased(MouseEvent e){
+        appstate.setEnd(e.getPoint());
         this.end = e.getPoint();
         double x = this.end.getX();
         double y = this.end.getY();
         System.out.println("mouse released");
         System.out.println("Release X: " + x + "and Y: " + y);
-        DrawShapeCommand draw = new DrawShapeCommand(start, end, g, IapplicationState, paintCanvasBase);
+        shapeInfo = appstate.getShapeInfo();
+        DrawShapeCommand draw = new DrawShapeCommand(g, appstate, paintCanvasBase, shapeInfo);
         draw.run();
         array.add(draw.returnshape());
         shapelist.giveSList(array);

@@ -19,18 +19,20 @@ public class DrawShapeCommand{
     private Graphics2D g;
     private ShapeColor color;
     private IShape shape;
+    private ShapeInfo shapeInfo;
 
-    public DrawShapeCommand(Point start, Point end, Graphics2D g, IApplicationState iappstate, PaintCanvasBase canvas){
-        this.start = start;
-        this.end = end;
+    public DrawShapeCommand(Graphics2D g, IApplicationState iappstate, PaintCanvasBase canvas, ShapeInfo shapeInfo){
+        this.start = iappstate.getStart();
+        this.end = iappstate.getEnd();
         this.shapetype = iappstate.getActiveShapeType();
         this.color = iappstate.getActivePrimaryColor();
         this.g = g;
+        this.shapeInfo = shapeInfo;
     }
 
     public void run(){
         ShapeFactory shapeFact = new ShapeFactory();
-        this.shape = shapeFact.drawShape(shapetype,start,end,color);
+        this.shape = shapeFact.drawShape(shapeInfo);
     }
     public IShape returnshape(){
         return shape;

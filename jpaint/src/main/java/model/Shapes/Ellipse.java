@@ -1,12 +1,14 @@
 package model.Shapes;
 
-import model.*;
+import model.ShapeColorTranslator;
+import model.ShapeInfo;
+import model.ShapeShadingType;
+import model.ShapeType;
 import model.interfaces.IShape;
 
 import java.awt.*;
-import java.util.ArrayList;
 
-public class Rectangle implements IShape {
+public class Ellipse implements IShape {
     private int x, y, width, height;
     private ShapeInfo shapeInfo;
     private Color primColor;
@@ -18,7 +20,7 @@ public class Rectangle implements IShape {
     private ShapeShadingType shadingType;
     private ShapeType shapeType;
 
-    public Rectangle(ShapeInfo shapeInfo){
+    public Ellipse(ShapeInfo shapeInfo){
         this.shapeInfo = shapeInfo;
         this.primColor = ShapeColorTranslator.translate(shapeInfo.getPrimColor());
         this.secColor = ShapeColorTranslator.translate(shapeInfo.getSecColor());
@@ -38,19 +40,21 @@ public class Rectangle implements IShape {
         if(shadingType.equals(ShapeShadingType.OUTLINE)){
             g.setColor(primColor);
             g.setStroke(new BasicStroke(3));
-            g.drawRect(x,y, width, height);
+            g.drawOval(x,y, width, height);
 
         }
         else if(shadingType.equals(ShapeShadingType.OUTLINE_AND_FILLED_IN)){
             g.setColor(primColor);
             g.setStroke(new BasicStroke(3));
-            g.drawRect(x,y,width,height);
+            g.drawOval(x,y,width,height);
             g.setColor(secColor);
-            g.fillRect(x,y,width,height);
+            g.fillOval(x,y,width,height);
         }
         else if(shadingType.equals(ShapeShadingType.FILLED_IN)){
             g.setColor(secColor);
-            g.fillRect(x,y,width,height);
+            g.fillOval(x,y,width,height);
         }
+
     }
 }
+

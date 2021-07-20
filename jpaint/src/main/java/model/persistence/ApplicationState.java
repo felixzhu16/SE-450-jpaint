@@ -6,6 +6,8 @@ import model.interfaces.IApplicationState;
 import model.interfaces.IDialogProvider;
 import view.interfaces.IUiModule;
 
+import java.awt.*;
+
 public class ApplicationState implements IApplicationState {
     private final IUiModule uiModule;
     private final IDialogProvider dialogProvider;
@@ -17,6 +19,8 @@ public class ApplicationState implements IApplicationState {
     private MouseMode activeMouseMode;
     private Undo activeUndo;
     private Redo activeRedo;
+    private Point start;
+    private Point end;
 
 
     public ApplicationState(IUiModule uiModule) {
@@ -50,16 +54,13 @@ public class ApplicationState implements IApplicationState {
         activeMouseMode = uiModule.getDialogResponse(dialogProvider.getChooseStartAndEndPointModeDialog());
     }
 
-    @Override
-    public void setUndo(){
-       activeUndo = uiModule.getDialogResponse(dialogProvider.getChooseUndoDialog());
+    public void setStart(Point start){
+        this.start = start;
     }
 
-    @Override
-    public void setRedo(){
-        activeRedo = uiModule.getDialogResponse(dialogProvider.getChooseRedoDialog());
+    public void setEnd(Point end){
+        this.end = end;
     }
-
     @Override
     public ShapeType getActiveShapeType() {
         return activeShapeType;
@@ -79,7 +80,26 @@ public class ApplicationState implements IApplicationState {
     public ShapeShadingType getActiveShapeShadingType() {
         return activeShapeShadingType;
     }
+    public ShapeInfo getShapeInfo(){
+        ShapeInfo shapeInfo = new ShapeInfo();
+        shapeInfo.setPrimColor(activePrimaryColor);
+        shapeInfo.setSecColor(activeSecondaryColor);
+        shapeInfo.setShadingType(activeShapeShadingType);
+        shapeInfo.setShapeType(activeShapeType);
+        shapeInfo.setStart(start);
+        shapeInfo.setEnd(end);
+        shapeInfo.setFixedStart();
+        shapeInfo.setFixedEnd();
+        return shapeInfo;
+    }
 
+    public Point getStart(){
+        return start;
+    }
+
+    public Point getEnd(){
+        return end;
+    }
     @Override
     public MouseMode getActiveMouseMode() {
         return activeMouseMode;

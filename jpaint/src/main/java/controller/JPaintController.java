@@ -1,5 +1,6 @@
 package controller;
 
+import model.ShapeInfo;
 import model.ShapeList;
 import model.interfaces.IApplicationState;
 import view.EventName;
@@ -12,12 +13,14 @@ public class JPaintController implements IJPaintController {
     private final IApplicationState applicationState;
     private final ShapeList shapeList;
     private final PaintCanvasBase paintcanvas;
+    private final ShapeInfo shapeInfo;
 
-    public JPaintController(IUiModule uiModule, IApplicationState applicationState, ShapeList shapeList, PaintCanvasBase paintcanvas) {
+    public JPaintController(IUiModule uiModule, IApplicationState applicationState, ShapeList shapeList, PaintCanvasBase paintcanvas, ShapeInfo shapeInfo) {
         this.uiModule = uiModule;
         this.applicationState = applicationState;
         this.shapeList = shapeList;
         this.paintcanvas = paintcanvas;
+        this.shapeInfo = shapeInfo;
     }
 
     @Override

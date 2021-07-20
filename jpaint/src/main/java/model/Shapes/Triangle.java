@@ -1,13 +1,14 @@
 package model.Shapes;
 
-import model.*;
+import model.ShapeColorTranslator;
+import model.ShapeInfo;
+import model.ShapeShadingType;
+import model.ShapeType;
 import model.interfaces.IShape;
 
 import java.awt.*;
-import java.util.ArrayList;
 
-public class Rectangle implements IShape {
-    private int x, y, width, height;
+public class Triangle implements IShape {
     private ShapeInfo shapeInfo;
     private Color primColor;
     private Color secColor;
@@ -17,8 +18,10 @@ public class Rectangle implements IShape {
     private Point fixedend;
     private ShapeShadingType shadingType;
     private ShapeType shapeType;
+    private int[] x = new int[3];
+    private int[] y = new int[3];
 
-    public Rectangle(ShapeInfo shapeInfo){
+    public Triangle(ShapeInfo shapeInfo){
         this.shapeInfo = shapeInfo;
         this.primColor = ShapeColorTranslator.translate(shapeInfo.getPrimColor());
         this.secColor = ShapeColorTranslator.translate(shapeInfo.getSecColor());
@@ -28,29 +31,37 @@ public class Rectangle implements IShape {
         this.fixedend = shapeInfo.getFixedEnd();
         this.shadingType = shapeInfo.getShadingType();
         this.shapeType = shapeInfo.getShapeType();
-        this.width = (int)(fixedend.getX() - fixedstart.getX());
-        this.height = (int)(fixedend.getY() - fixedstart.getY());
-        this.x = (int) fixedstart.getX();
-        this.y = (int) fixedstart.getY();
+        //Starting vertex coordinates
+        //Making a right triangle
+        this.x[0] = (int) fixedstart.getX();
+        this.y[0] = (int) fixedstart.getY();
+        //Second vertex
+        this.x[1] = (int) fixedend.getX();
+        this.y[1] = (int) fixedend.getY();
+        //Third vertex
+        this.x[2] = (int) fixedstart.getX();
+        this.y[2] = (int) fixedend.getY();
     }
 
     public void draw(Graphics2D g){
         if(shadingType.equals(ShapeShadingType.OUTLINE)){
             g.setColor(primColor);
             g.setStroke(new BasicStroke(3));
-            g.drawRect(x,y, width, height);
+            g.drawPolygon(x,y, 3);
 
         }
         else if(shadingType.equals(ShapeShadingType.OUTLINE_AND_FILLED_IN)){
             g.setColor(primColor);
             g.setStroke(new BasicStroke(3));
-            g.drawRect(x,y,width,height);
+            g.drawPolygon(x,y, 3);
             g.setColor(secColor);
-            g.fillRect(x,y,width,height);
+            g.fillPolygon(x,y, 3);
         }
         else if(shadingType.equals(ShapeShadingType.FILLED_IN)){
             g.setColor(secColor);
-            g.fillRect(x,y,width,height);
+            g.drawPolygon(x,y, 3);
         }
+
     }
+
 }

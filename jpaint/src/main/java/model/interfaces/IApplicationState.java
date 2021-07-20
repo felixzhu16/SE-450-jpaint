@@ -2,6 +2,8 @@ package model.interfaces;
 
 import model.*;
 
+import java.awt.*;
+
 public interface IApplicationState {
     void setActiveShape();
 
@@ -13,6 +15,10 @@ public interface IApplicationState {
 
     void setActiveStartAndEndPointMode();
 
+    void setStart(Point start);
+
+    void setEnd(Point end);
+
     ShapeType getActiveShapeType();
 
     ShapeColor getActivePrimaryColor();
@@ -21,12 +27,13 @@ public interface IApplicationState {
 
     ShapeShadingType getActiveShapeShadingType();
 
+    ShapeInfo getShapeInfo();
+
     MouseMode getActiveMouseMode();
 
-    void setUndo();
+    Point getStart();
 
-    void setRedo();
-
+    Point getEnd();
 
     Undo getUndo();
 
