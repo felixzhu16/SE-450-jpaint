@@ -23,12 +23,16 @@ public class DrawShape implements IShape {
     public void draw(Graphics2D g) {
         ShapeType shapeType = shapeinfo.getShapeType();
         IShape shape = null;
-        if(shapeType.equals(ShapeType.RECTANGLE)){
-            shape = ShapeFactory.drawRectangle(shapeinfo);
-        } else if(shapeType.equals(ShapeType.ELLIPSE)){
-            shape = ShapeFactory.drawEllipse(shapeinfo);
-        } else if (shapeType.equals(ShapeType.TRIANGLE)){
-            shape = ShapeFactory.drawTriangle(shapeinfo);
+        switch(shapeType.toString()){
+            case "RECTANGLE":
+                shape = ShapeFactory.drawRectangle(shapeinfo);
+                break;
+            case "ELLIPSE":
+                shape = ShapeFactory.drawEllipse(shapeinfo);
+                break;
+            case "TRIANGLE":
+                shape = ShapeFactory.drawTriangle(shapeinfo);
+                break;
         }
         shape.draw(g);
     }
