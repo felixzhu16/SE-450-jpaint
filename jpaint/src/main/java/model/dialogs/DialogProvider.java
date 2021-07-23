@@ -16,8 +16,6 @@ public class DialogProvider implements IDialogProvider {
     private final IDialogChoice<ShapeColor> chooseSecondaryColorDialog;
     private final IDialogChoice<ShapeShadingType> chooseShadingTypeDialog;
     private final IDialogChoice<MouseMode> chooseStartAndEndPointModeDialog;
-    private final IDialogChoice<Undo> chooseUndoDialog;
-    private final IDialogChoice<Redo> chooseRedoDialog;
 
     private final IApplicationState applicationState;
 
@@ -28,8 +26,6 @@ public class DialogProvider implements IDialogProvider {
         chooseSecondaryColorDialog = new ChooseSecondaryColorDialog(this.applicationState);
         chooseShadingTypeDialog = new ChooseShadingTypeDialog(this.applicationState);
         chooseStartAndEndPointModeDialog = new ChooseStartAndEndPointModeDialog(this.applicationState);
-        chooseUndoDialog = new ChooseUndoDialog(this.applicationState);
-        chooseRedoDialog = new ChooseRedoDialog(this.applicationState);
     }
 
     @Override
@@ -56,11 +52,5 @@ public class DialogProvider implements IDialogProvider {
     public IDialogChoice<MouseMode> getChooseStartAndEndPointModeDialog() {
         return chooseStartAndEndPointModeDialog;
     }
-
-    @Override
-    public IDialogChoice<Undo> getChooseUndoDialog(){return chooseUndoDialog;}
-
-    @Override
-    public IDialogChoice<Redo> getChooseRedoDialog(){return chooseRedoDialog;}
 
 }

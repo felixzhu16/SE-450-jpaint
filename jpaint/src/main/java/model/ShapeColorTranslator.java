@@ -38,6 +38,9 @@ public class ShapeColorTranslator {
             case ORANGE:
                 shapecol = Color.ORANGE;
                 break;
+            case PINK:
+                shapecol = Color.PINK;
+                break;
             case RED:
                 shapecol = Color.RED;
                 break;

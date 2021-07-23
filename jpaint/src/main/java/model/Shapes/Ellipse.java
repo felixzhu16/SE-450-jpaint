@@ -10,6 +10,7 @@ import java.awt.*;
 
 public class Ellipse implements IShape {
     private int x, y, width, height;
+    int x2, y2;
     private ShapeInfo shapeInfo;
     private Color primColor;
     private Color secColor;
@@ -34,9 +35,15 @@ public class Ellipse implements IShape {
         this.height = (int)(fixedend.getY() - fixedstart.getY());
         this.x = (int) fixedstart.getX();
         this.y = (int) fixedstart.getY();
+        this.x2 = (int) fixedend.getX();
+        this.y2 = (int) fixedend.getY();
     }
 
     public void draw(Graphics2D g){
+        x = (int) fixedstart.getX();
+        y = (int) fixedstart.getY();
+        x2 = (int) fixedend.getX();
+        y2 = (int) fixedend.getY();
         if(shadingType.equals(ShapeShadingType.OUTLINE)){
             g.setColor(primColor);
             g.setStroke(new BasicStroke(3));
@@ -56,5 +63,19 @@ public class Ellipse implements IShape {
         }
 
     }
+
+    public Point getFixedStart(){
+        return fixedstart;
+    }
+
+    public Point getFixedEnd(){
+        return fixedend;
+    }
+
+    public void modXYCoords(double x, double y){
+        fixedstart.setLocation(fixedstart.getX() + x, fixedstart.getY() + y);
+        fixedend.setLocation(fixedend.getX() + x, fixedend.getY() + y);
+    }
+
 }
 

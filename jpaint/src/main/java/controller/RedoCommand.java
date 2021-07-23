@@ -3,7 +3,7 @@ package controller;
 import model.ShapeList;
 import view.interfaces.PaintCanvasBase;
 
-public class RedoCommand implements ICommand, IUndoable{
+public class RedoCommand implements ICommand{
     private ShapeList shapelist;
     private PaintCanvasBase paintcanvas;
     public RedoCommand(ShapeList shapelist, PaintCanvasBase paintcanvas){
@@ -11,19 +11,7 @@ public class RedoCommand implements ICommand, IUndoable{
         this.paintcanvas = paintcanvas;
     }
     public void run(){
-        if(CommandHistory.redo()){
-            shapelist.addLast();
-            paintcanvas.repaint();
-        }
+        CommandHistory.redo();
     }
 
-    @Override
-    public void undo() {
-
-    }
-
-    @Override
-    public void redo() {
-
-    }
 }

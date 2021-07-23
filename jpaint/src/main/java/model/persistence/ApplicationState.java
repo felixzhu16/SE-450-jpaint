@@ -80,6 +80,7 @@ public class ApplicationState implements IApplicationState {
     public ShapeShadingType getActiveShapeShadingType() {
         return activeShapeShadingType;
     }
+
     public ShapeInfo getShapeInfo(){
         ShapeInfo shapeInfo = new ShapeInfo();
         shapeInfo.setPrimColor(activePrimaryColor);

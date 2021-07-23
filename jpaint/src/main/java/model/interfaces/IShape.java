@@ -7,4 +7,7 @@ import java.util.ArrayList;
 
 public interface IShape {
     void draw(Graphics2D g);
+    Point getFixedStart();
+    Point getFixedEnd();
+    void modXYCoords(double x, double y);
 }

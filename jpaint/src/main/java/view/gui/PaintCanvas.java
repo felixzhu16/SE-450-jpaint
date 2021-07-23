@@ -37,6 +37,9 @@ public class PaintCanvas extends PaintCanvasBase {
     public void paint(Graphics g) {
         super.paint(g);
         ArrayList<IShape> canvasShapes = shapelist.getCurrList();
+        for(IShape shape : canvasShapes){
+            System.out.println("Shape Start Coords are: " + shape.getFixedStart() + " and Shape end Coords are: " + shape.getFixedEnd());
+        }
         Graphics2D graphics2D = (Graphics2D) g;
         paintList(canvasShapes, graphics2D); //paints the list of shapes we have drawn
         System.out.println("Time to repaint");

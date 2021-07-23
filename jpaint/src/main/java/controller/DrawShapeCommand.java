@@ -9,10 +9,11 @@ import model.persistence.ApplicationState;
 import view.gui.PaintCanvas;
 import view.interfaces.PaintCanvasBase;
 
+
 import java.awt.*;
 import java.util.ArrayList;
 
-public class DrawShapeCommand{
+public class DrawShapeCommand implements ICommand, IUndoable{
     private Point start;
     private Point end;
     private ShapeType shapetype;
@@ -20,21 +21,36 @@ public class DrawShapeCommand{
     private ShapeColor color;
     private IShape shape;
     private ShapeInfo shapeInfo;
+    private ShapeList shapelist;
+    private PaintCanvasBase canvas;
 
-    public DrawShapeCommand(Graphics2D g, IApplicationState iappstate, PaintCanvasBase canvas, ShapeInfo shapeInfo){
+    public DrawShapeCommand(Graphics2D g, IApplicationState iappstate, PaintCanvasBase canvas, ShapeInfo shapeInfo, ShapeList shapelist){
         this.start = iappstate.getStart();
         this.end = iappstate.getEnd();
         this.shapetype = iappstate.getActiveShapeType();
         this.color = iappstate.getActivePrimaryColor();
         this.g = g;
         this.shapeInfo = shapeInfo;
+        this.shapelist = shapelist;
+        this.canvas = canvas;
     }
 
     public void run(){
-        ShapeFactory shapeFact = new ShapeFactory();
-        this.shape = shapeFact.drawShape(shapeInfo);
+        this.shape = new DrawShape(shapeInfo, start, end);
+        shape.draw(g);
+        shapelist.addShape(shape);
+        CommandHistory.add(this);
     }
-    public IShape returnshape(){
-        return shape;
+
+    @Override
+    public void undo() {
+        shapelist.removeLast();
+        canvas.repaint();
+    }
+
+    @Override
+    public void redo() {
+        shapelist.addLast();
+        canvas.repaint();
     }
 }

@@ -20,6 +20,7 @@ public class Triangle implements IShape {
     private ShapeType shapeType;
     private int[] x = new int[3];
     private int[] y = new int[3];
+    int x1,y1, x2, y2;
 
     public Triangle(ShapeInfo shapeInfo){
         this.shapeInfo = shapeInfo;
@@ -41,9 +42,30 @@ public class Triangle implements IShape {
         //Third vertex
         this.x[2] = (int) fixedstart.getX();
         this.y[2] = (int) fixedend.getY();
+
+    }
+
+    public Point getFixedStart(){
+        return fixedstart;
+    }
+
+    public Point getFixedEnd(){
+        return fixedend;
+    }
+
+    public void modXYCoords(double x, double y){
+        fixedstart.setLocation(fixedstart.getX() + x, fixedstart.getY() + y);
+        fixedend.setLocation(fixedend.getX() + x, fixedend.getY() + y);
     }
 
     public void draw(Graphics2D g){
+        x[0] = (int) fixedstart.getX();
+        y[0] = (int) fixedstart.getY();
+        x[1] = (int) fixedend.getX();
+        y[1] = (int) fixedend.getY();
+        x[2] = (int) fixedstart.getX();
+        y[2] = (int) fixedend.getY();
+
         if(shadingType.equals(ShapeShadingType.OUTLINE)){
             g.setColor(primColor);
             g.setStroke(new BasicStroke(3));
@@ -59,7 +81,7 @@ public class Triangle implements IShape {
         }
         else if(shadingType.equals(ShapeShadingType.FILLED_IN)){
             g.setColor(secColor);
-            g.drawPolygon(x,y, 3);
+            g.fillPolygon(x,y, 3);
         }
 
     }

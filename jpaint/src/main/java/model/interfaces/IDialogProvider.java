@@ -19,8 +19,4 @@ public interface IDialogProvider {
     IDialogChoice<ShapeShadingType> getChooseShadingTypeDialog();
 
     IDialogChoice<MouseMode> getChooseStartAndEndPointModeDialog();
-
-    IDialogChoice<Undo> getChooseUndoDialog();
-
-    IDialogChoice<Redo> getChooseRedoDialog();
 }
