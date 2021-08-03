@@ -11,11 +11,24 @@ public class DrawShape implements IShape {
     ShapeInfo shapeinfo;
     Point fixedstart, fixedend;
 
-    public DrawShape(ShapeInfo shapeinfo, Point start, Point end){
-        this.shapeinfo = shapeinfo;
+    public DrawShape(Point start, Point end, ShapeColor primColor, ShapeColor secColor, ShapeType type, ShapeShadingType shading){
+        this.shapeinfo = new ShapeInfo();
+        shapeinfo.setFixedEnd(end);
+        shapeinfo.setFixedStart(start);
+        shapeinfo.setPrimColor(primColor);
+        shapeinfo.setSecColor(secColor);
+        shapeinfo.setShapeType(type);
+        shapeinfo.setShadingType(shading);
         this.fixedstart = start;
         this.fixedend = end;
     }
+
+//
+//    public DrawShape(ShapeInfo shapeinfo, Point start, Point end){
+//        this.shapeinfo = shapeinfo;
+//        this.fixedstart = start;
+//        this.fixedend = end;
+//    }
 
 
     @Override
@@ -35,6 +48,7 @@ public class DrawShape implements IShape {
         }
         shape.draw(g);
     }
+
 
     @Override
     public Point getFixedStart() {

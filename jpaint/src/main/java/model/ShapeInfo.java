@@ -28,13 +28,21 @@ public class ShapeInfo {
         this.end = end;
     }
 
-    public void setFixedStart(){
+    public void setFixedStart(Point x){
+        this.fixedStart = x;
+    }
+
+    public void setFixedEnd(Point x){
+        this.fixedEnd = x;
+    }
+
+    public void calcFixedStart(){
         int x = (int) Math.min(start.getX(),end.getX());
         int y = (int) Math.min(start.getY(),end.getY());
         this.fixedStart = new Point(x,y);
     }
 
-    public void setFixedEnd(){
+    public void calcFixedEnd(){
         int x = (int) Math.max(start.getX(),end.getX());
         int y = (int) Math.max(start.getY(),end.getY());
         this.fixedEnd = new Point(x,y);

@@ -92,8 +92,8 @@ public class ApplicationState implements IApplicationState {
         shapeInfo.setShapeType(activeShapeType);
         shapeInfo.setStart(start);
         shapeInfo.setEnd(end);
-        shapeInfo.setFixedStart();
-        shapeInfo.setFixedEnd();
+        shapeInfo.calcFixedStart();
+        shapeInfo.calcFixedEnd();
         return shapeInfo;
     }
 

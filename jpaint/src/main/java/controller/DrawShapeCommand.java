@@ -18,17 +18,20 @@ public class DrawShapeCommand implements ICommand, IUndoable{
     private Point end;
     private ShapeType shapetype;
     private Graphics2D g;
-    private ShapeColor color;
+    private ShapeColor primColor, secColor;
     private IShape shape;
     private ShapeInfo shapeInfo;
     private ShapeList shapelist;
     private PaintCanvasBase canvas;
+    private ShapeShadingType shading;
 
     public DrawShapeCommand(Graphics2D g, IApplicationState iappstate, PaintCanvasBase canvas, ShapeInfo shapeInfo, ShapeList shapelist){
         this.start = iappstate.getStart();
         this.end = iappstate.getEnd();
         this.shapetype = iappstate.getActiveShapeType();
-        this.color = iappstate.getActivePrimaryColor();
+        this.primColor = iappstate.getActivePrimaryColor();
+        this.secColor = iappstate.getActiveSecondaryColor();
+        this.shading = iappstate.getActiveShapeShadingType();
         this.g = g;
         this.shapeInfo = shapeInfo;
         this.shapelist = shapelist;
@@ -36,7 +39,7 @@ public class DrawShapeCommand implements ICommand, IUndoable{
     }
 
     public void run(){
-        this.shape = new DrawShape(shapeInfo, shapeInfo.getFixedStart(), shapeInfo.getFixedEnd());
+        this.shape = new DrawShape(shapeInfo.getFixedStart(), shapeInfo.getFixedEnd(), primColor, secColor, shapetype, shading);
         shape.draw(g);
         shapelist.addShape(shape);
         CommandHistory.add(this);

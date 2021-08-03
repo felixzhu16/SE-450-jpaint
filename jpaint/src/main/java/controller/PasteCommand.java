@@ -1,8 +1,6 @@
 package controller;
 
-import model.DrawShape;
-import model.ShapeInfo;
-import model.ShapeList;
+import model.*;
 import model.interfaces.IApplicationState;
 import model.interfaces.IShape;
 import view.interfaces.PaintCanvasBase;
@@ -31,11 +29,13 @@ public class PasteCommand implements ICommand, IUndoable {
             Point incEnd = new Point();
             incStart.setLocation(shape.getFixedStart().getX() + 20, shape.getFixedStart().getY() + 20);
             incEnd.setLocation(shape.getFixedEnd().getX() + 20, shape.getFixedEnd().getY() + 20);
-            copyShape = new DrawShape(shape.getShapeInfo(),incStart,incEnd);
+            copyShape = new DrawShape(incStart, incEnd, shape.getShapeInfo().getPrimColor(), shape.getShapeInfo().getSecColor(),
+                        shape.getShapeInfo().getShapeType(), shape.getShapeInfo().getShadingType());
             tempPasteList.add(copyShape);
             shapelist.addShape(copyShape);
         }
         CommandHistory.add(this);
+        paintcanvas.repaint();
     }
 
     @Override
@@ -43,6 +43,7 @@ public class PasteCommand implements ICommand, IUndoable {
         for(IShape t : tempPasteList){
             shapelist.removeShape(t);
         }
+        paintcanvas.repaint();
     }
 
     @Override
@@ -50,5 +51,6 @@ public class PasteCommand implements ICommand, IUndoable {
         for(IShape t : tempPasteList){
             shapelist.addShape(t);
         }
+        paintcanvas.repaint();
     }
 }
