@@ -72,9 +72,29 @@ public class Ellipse implements IShape {
         return fixedend;
     }
 
+
+    @Override
+    public void setFixedStart(Point x) {
+        fixedstart = x;
+    }
+
+    @Override
+    public void setFixedEnd(Point x) {
+        fixedend = x;
+    }
+
     public void modXYCoords(double x, double y){
         fixedstart.setLocation(fixedstart.getX() + x, fixedstart.getY() + y);
         fixedend.setLocation(fixedend.getX() + x, fixedend.getY() + y);
+    }
+
+    public ShapeInfo getShapeInfo(){
+        return shapeInfo;
+    }
+
+    @Override
+    public void setShapeInfo(ShapeInfo shapeinfo) {
+        this.shapeInfo = shapeinfo;
     }
 
 }

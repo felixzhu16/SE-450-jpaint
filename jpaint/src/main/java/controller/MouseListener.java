@@ -42,8 +42,6 @@ public class MouseListener extends MouseAdapter {
         this.start = e.getPoint();
         double x = this.start.getX();
         double y = this.start.getY();
-        System.out.println("mouse pressed");
-        System.out.println("Press X: " + x + "and Y: " + y);
     }
     @Override
     public void mouseReleased(MouseEvent e){
@@ -51,8 +49,6 @@ public class MouseListener extends MouseAdapter {
         this.end = e.getPoint();
         double x = this.end.getX();
         double y = this.end.getY();
-        System.out.println("mouse released");
-        System.out.println("Release X: " + x + "and Y: " + y);
 
         if(appstate.getActiveMouseMode().equals(MouseMode.DRAW)){
             shapeInfo = appstate.getShapeInfo();
@@ -65,6 +61,7 @@ public class MouseListener extends MouseAdapter {
             System.out.println("SELECT MOUSE MODE");
             SelectShapeCommand select = new SelectShapeCommand(shapelist, appstate, shapeInfo);
             select.run();
+            paintCanvasBase.repaint();
 
         } else if (appstate.getActiveMouseMode().equals(MouseMode.MOVE)){
             System.out.println("MOVE MOUSE MODE");

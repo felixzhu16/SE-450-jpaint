@@ -48,10 +48,10 @@ public class SelectShapeCommand implements ICommand{
 
     @Override
     public void run() {
+        shapeList.emptySelectedList();
         fixCollisionStart();
         fixCollisionEnd();
         for(IShape shape : shapeList.getCurrList()){
-            System.out.println("fStart: " + fixstart + " and fEnd: " + fixend);
             if(hasPoint(shape.getFixedStart(), shape.getFixedEnd())){
                 shapeList.addSelectedShape(shape);
                 System.out.println("Shape added to selected shape list");

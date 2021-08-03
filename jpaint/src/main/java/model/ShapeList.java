@@ -12,6 +12,8 @@ public class ShapeList {
     public ArrayList<IShape> selectedShapes;
     public int selectedShapeCount;
     public ArrayList<IShape> movedShapes;
+    public ArrayList<IShape> deletedShapes;
+    public ArrayList<IShape> copiedShapes;
 
 
     public ShapeList() {
@@ -19,6 +21,8 @@ public class ShapeList {
         this.removedShapes = new ArrayList<IShape>();
         this.selectedShapes = new ArrayList<IShape>();
         this.movedShapes = new ArrayList<IShape>();
+        this.deletedShapes = new ArrayList<IShape>();
+        this.copiedShapes = new ArrayList<IShape>();
     }
 
     public void setSelectShapeCount(int count){
@@ -29,6 +33,13 @@ public class ShapeList {
         return selectedShapeCount;
     }
 
+    //shapes and removed shape list methods
+    public boolean contains(IShape shape){
+        if(shapes.contains(shape)){
+            return true;
+        }
+        return false;
+    }
     public void removeLast(){
         removedShapes.add(shapes.get(shapes.size()-1));
         shapes.remove(shapes.get(shapes.size()-1));
@@ -48,6 +59,7 @@ public class ShapeList {
         removedShapes.remove(shape);
     }
 
+    //Selected shape methods
     public void addSelectedShape(IShape shape){
         selectedShapes.add(shape);
     }
@@ -65,6 +77,34 @@ public class ShapeList {
         shapes.add(shape);
     }
 
+    //Delete List methods
+    public void addDeleteShape(IShape shape){
+        deletedShapes.add(shape);
+    }
+    public void deleteShape(IShape shape){
+        System.out.println("DELETE SHAPE METHOD");
+        shapes.remove(shape);
+    }
+
+    //Copied List method
+
+    public void addCopyShape(IShape shape){
+        copiedShapes.add(shape);
+    }
+
+
+    public void deleteShapeSelected(IShape shape){
+        selectedShapes.remove(shape);
+    }
+
+    public void undoDelete(IShape shape){
+        shapes.add(shape);
+    }
+
+    public void undoDeleteShapeSelected(IShape shape){
+        selectedShapes.add(shape);
+    }
+
     public void giveSList(ArrayList<IShape> list){
         shapes = list;
     }
@@ -72,9 +112,11 @@ public class ShapeList {
     public int size(){
         return shapes.size();
     }
+    public ArrayList<IShape> getDeleteList(){return deletedShapes;}
     public ArrayList<IShape> getCurrList(){
         return shapes;
     }
     public ArrayList<IShape> getSelectList(){return selectedShapes;}
     public ArrayList<IShape> getMovedShapes(){return movedShapes;}
+    public ArrayList<IShape> getCopiedList(){return copiedShapes;}
 }

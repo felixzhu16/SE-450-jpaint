@@ -1,6 +1,7 @@
 package view.gui;
 
 import controller.DrawShapeCommand;
+import model.DrawDash;
 import model.ShapeFactory;
 import model.ShapeList;
 import model.interfaces.IShape;
@@ -13,8 +14,12 @@ import java.util.ArrayList;
 
 public class PaintCanvas extends PaintCanvasBase {
     private ShapeList shapelist;
+    private ArrayList<IShape> canvasShapes;
+    private ArrayList<IShape> selectShapes;
     public PaintCanvas(ShapeList shapeList){
         this.shapelist = shapeList;
+        this.canvasShapes = shapelist.getCurrList();
+        this.selectShapes = shapelist.getSelectList();
     }
     public Graphics2D getGraphics2D() {
         return (Graphics2D)getGraphics();
@@ -22,8 +27,20 @@ public class PaintCanvas extends PaintCanvasBase {
 
     public void paintList(ArrayList<IShape> list, Graphics2D g){
         if(list != null){
+            System.out.println("Size of shape list when painting: " + list.size());
             for(IShape x : list){
                 x.draw(g);
+            }
+        }
+    }
+
+    public void paintSelected(ArrayList<IShape> list, Graphics2D g){
+        if(list != null){
+            for(IShape x : list){
+                if(shapelist.contains(x)) {
+                    DrawDash drawdash = new DrawDash(x);
+                    drawdash.drawDashShape(g);
+                }
             }
         }
     }
@@ -36,12 +53,9 @@ public class PaintCanvas extends PaintCanvasBase {
      */
     public void paint(Graphics g) {
         super.paint(g);
-        ArrayList<IShape> canvasShapes = shapelist.getCurrList();
-        for(IShape shape : canvasShapes){
-            System.out.println("Shape Start Coords are: " + shape.getFixedStart() + " and Shape end Coords are: " + shape.getFixedEnd());
-        }
         Graphics2D graphics2D = (Graphics2D) g;
         paintList(canvasShapes, graphics2D); //paints the list of shapes we have drawn
+        paintSelected(selectShapes, graphics2D);
         System.out.println("Time to repaint");
     }
 }

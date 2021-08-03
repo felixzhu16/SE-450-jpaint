@@ -5,15 +5,15 @@ import model.*;
 import java.awt.*;
 
 public interface IApplicationState {
-    void setActiveShape();
+    void setActiveShape(ShapeType type);
 
     void setActivePrimaryColor();
 
     void setActiveSecondaryColor();
 
-    void setActiveShadingType();
+    void setActiveShadingType(ShapeShadingType type);
 
-    void setActiveStartAndEndPointMode();
+    void setActiveStartAndEndPointMode(MouseMode mode);
 
     void setStart(Point start);
 

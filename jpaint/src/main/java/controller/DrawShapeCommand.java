@@ -36,10 +36,14 @@ public class DrawShapeCommand implements ICommand, IUndoable{
     }
 
     public void run(){
-        this.shape = new DrawShape(shapeInfo, start, end);
+        this.shape = new DrawShape(shapeInfo, shapeInfo.getFixedStart(), shapeInfo.getFixedEnd());
         shape.draw(g);
         shapelist.addShape(shape);
         CommandHistory.add(this);
+    }
+
+    public IShape getShape(){
+        return shape;
     }
 
     @Override

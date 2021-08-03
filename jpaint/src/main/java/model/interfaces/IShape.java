@@ -9,5 +9,9 @@ public interface IShape {
     void draw(Graphics2D g);
     Point getFixedStart();
     Point getFixedEnd();
+    void setFixedStart(Point x);
+    void setFixedEnd(Point x);
     void modXYCoords(double x, double y);
+    ShapeInfo getShapeInfo();
+    void setShapeInfo(ShapeInfo shapeinfo);
 }

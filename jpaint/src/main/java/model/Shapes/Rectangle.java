@@ -36,6 +36,8 @@ public class Rectangle implements IShape {
         this.y2 = (int) fixedend.getY();
     }
 
+
+
     public void draw(Graphics2D g){
         x = (int) fixedstart.getX();
         y = (int) fixedstart.getY();
@@ -45,7 +47,6 @@ public class Rectangle implements IShape {
             g.setColor(primColor);
             g.setStroke(new BasicStroke(3));
             g.drawRect(x,y, width, height);
-            System.out.println("Fixstart: " + fixedstart + " Fixedend: " + fixedend);
 
         }
         else if(shadingType.equals(ShapeShadingType.OUTLINE_AND_FILLED_IN)){
@@ -54,12 +55,10 @@ public class Rectangle implements IShape {
             g.drawRect(x,y,width,height);
             g.setColor(secColor);
             g.fillRect(x,y,width,height);
-            System.out.println("Fixstart: " + fixedstart + " Fixedend: " + fixedend);
         }
         else if(shadingType.equals(ShapeShadingType.FILLED_IN)){
             g.setColor(secColor);
             g.fillRect(x,y,width,height);
-            System.out.println("Fixstart: " + fixedstart + " Fixedend: " + fixedend);
         }
     }
 
@@ -71,8 +70,29 @@ public class Rectangle implements IShape {
         return fixedend;
     }
 
+    @Override
+    public void setFixedStart(Point x) {
+        fixedstart = x;
+    }
+
+    @Override
+    public void setFixedEnd(Point x) {
+        fixedend = x;
+    }
+
     public void modXYCoords(double x, double y){
         fixedstart.setLocation(fixedstart.getX() + x, fixedstart.getY() + y);
         fixedend.setLocation(fixedend.getX() + x, fixedend.getY() + y);
     }
+
+    public ShapeInfo getShapeInfo(){
+        return shapeInfo;
+    }
+
+    @Override
+    public void setShapeInfo(ShapeInfo shapeinfo) {
+        this.shapeInfo = shapeinfo;
+    }
+
+
 }

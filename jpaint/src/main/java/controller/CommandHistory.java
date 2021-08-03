@@ -9,7 +9,6 @@ public class CommandHistory {
 
 	public static void add(IUndoable cmd) {
 		undoStack.push(cmd);
-		//redoStack.clear();
 	}
 	
 	public static boolean undo() {

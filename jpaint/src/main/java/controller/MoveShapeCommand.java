@@ -39,9 +39,6 @@ public class MoveShapeCommand implements ICommand, IUndoable{
             shapeList.addShape(modshape);
         }
         CommandHistory.add(this);
-        System.out.println("ShapeList size inside move command is: " + tempMovedShapes.size());
-
-
     }
 
     @Override

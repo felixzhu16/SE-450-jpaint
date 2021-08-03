@@ -9,15 +9,14 @@ import java.awt.*;
 
 public class DrawShape implements IShape {
     ShapeInfo shapeinfo;
-    Point fixedstart, fixedend, start, end;
+    Point fixedstart, fixedend;
 
     public DrawShape(ShapeInfo shapeinfo, Point start, Point end){
         this.shapeinfo = shapeinfo;
-        this.start = start;
-        this.end = end;
-        this.fixedstart = shapeinfo.getFixedStart();
-        this.fixedend = shapeinfo.getFixedEnd();
+        this.fixedstart = start;
+        this.fixedend = end;
     }
+
 
     @Override
     public void draw(Graphics2D g) {
@@ -47,9 +46,31 @@ public class DrawShape implements IShape {
         return fixedend;
     }
 
+
+    @Override
+    public void setFixedStart(Point x) {
+        fixedstart = x;
+    }
+
+    @Override
+    public void setFixedEnd(Point x) {
+        fixedend = x;
+    }
+
     @Override
     public void modXYCoords(double x, double y) {
         fixedstart.setLocation(fixedstart.getX() + x, fixedstart.getY() + y);
         fixedend.setLocation(fixedend.getX() + x, fixedend.getY() + y);
     }
+
+    @Override
+    public ShapeInfo getShapeInfo() {
+        return shapeinfo;
+    }
+
+    @Override
+    public void setShapeInfo(ShapeInfo shapeinfo) {
+        this.shapeinfo = shapeinfo;
+    }
+
 }
