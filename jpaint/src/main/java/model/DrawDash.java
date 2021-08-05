@@ -20,45 +20,45 @@ public class DrawDash implements IShape {
     }
 
      public void drawDashShape(Graphics2D g){
-        draw(g);
+         switch(shapetype.toString()){
+             case "RECTANGLE":
+                 int width = (int)(end.getX() - start.getX()) + 10;
+                 int height = (int)(end.getY() - start.getY()) + 10;
+                 int x = (int) start.getX() - 5;
+                 int y = (int) start.getY() - 5;
+                 g.setColor(Color.BLACK);
+                 g.setStroke(stroke);
+                 g.drawRect(x,y, width, height);
+                 break;
+             case "ELLIPSE":
+                 int eW = (int)(end.getX() - start.getX()) + 10;
+                 int eH = (int)(end.getY() - start.getY()) + 10;
+                 int eX = (int) start.getX() - 5;
+                 int eY = (int) start.getY() - 5;
+                 g.setColor(Color.BLACK);
+                 g.setStroke(stroke);
+                 g.drawOval(eX,eY, eW, eH);
+                 break;
+             case "TRIANGLE":
+                 int[] tX = new int[3];
+                 int[] tY = new int[3];
+                 tX[0] = (int) start.getX() - 8;
+                 tY[0] = (int) start.getY() - 15;
+                 tX[1] = (int) end.getX() + 15;
+                 tY[1] = (int) end.getY() + 8;
+                 tX[2] = (int) start.getX() - 8;
+                 tY[2] = (int) end.getY() + 8;
+                 g.setColor(Color.BLACK);
+                 g.setStroke(stroke);
+                 g.drawPolygon(tX,tY, 3);
+                 break;
+         }
+         shape.draw(g);
      }
 
     @Override
     public void draw(Graphics2D g) {
-        switch(shapetype.toString()){
-            case "RECTANGLE":
-                int width = (int)(end.getX() - start.getX()) + 10;
-                int height = (int)(end.getY() - start.getY()) + 10;
-                int x = (int) start.getX() - 5;
-                int y = (int) start.getY() - 5;
-                g.setColor(Color.BLACK);
-                g.setStroke(stroke);
-                g.drawRect(x,y, width, height);
-                break;
-            case "ELLIPSE":
-                int eW = (int)(end.getX() - start.getX()) + 10;
-                int eH = (int)(end.getY() - start.getY()) + 10;
-                int eX = (int) start.getX() - 5;
-                int eY = (int) start.getY() - 5;
-                g.setColor(Color.BLACK);
-                g.setStroke(stroke);
-                g.drawOval(eX,eY, eW, eH);
-                break;
-            case "TRIANGLE":
-                int[] tX = new int[3];
-                int[] tY = new int[3];
-                tX[0] = (int) start.getX() - 8;
-                tY[0] = (int) start.getY() - 15;
-                tX[1] = (int) end.getX() + 15;
-                tY[1] = (int) end.getY() + 8;
-                tX[2] = (int) start.getX() - 8;
-                tY[2] = (int) end.getY() + 8;
-                g.setColor(Color.BLACK);
-                g.setStroke(stroke);
-                g.drawPolygon(tX,tY, 3);
-                break;
-        }
-        shape.draw(g);
+       drawDashShape(g);
     }
 
     @Override

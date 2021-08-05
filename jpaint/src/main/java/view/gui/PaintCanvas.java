@@ -25,25 +25,18 @@ public class PaintCanvas extends PaintCanvasBase {
         return (Graphics2D)getGraphics();
     }
 
-    public void paintList(ArrayList<IShape> list, Graphics2D g){
+    public void paintList(ArrayList<IShape> list, ArrayList<IShape> selectlist,Graphics2D g){
         if(list != null){
             System.out.println("Size of shape list when painting: " + list.size());
             for(IShape x : list){
+                if(selectlist.contains(x)){
+                    x = new DrawDash(x);
+                }
                 x.draw(g);
             }
         }
     }
 
-    public void paintSelected(ArrayList<IShape> list, Graphics2D g){
-        if(list != null){
-            for(IShape x : list){
-                if(shapelist.contains(x)) {
-                    DrawDash drawdash = new DrawDash(x);
-                    drawdash.drawDashShape(g);
-                }
-            }
-        }
-    }
 
     @Override
     /**
@@ -54,8 +47,7 @@ public class PaintCanvas extends PaintCanvasBase {
     public void paint(Graphics g) {
         super.paint(g);
         Graphics2D graphics2D = (Graphics2D) g;
-        paintList(canvasShapes, graphics2D); //paints the list of shapes we have drawn
-        paintSelected(selectShapes, graphics2D);
+        paintList(canvasShapes, selectShapes, graphics2D); //paints the list of shapes we have drawn
         System.out.println("Time to repaint");
     }
 }
