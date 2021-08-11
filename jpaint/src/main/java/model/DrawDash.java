@@ -93,9 +93,5 @@ public class DrawDash implements IShape {
         return shape.getShapeInfo();
     }
 
-    @Override
-    public void setShapeInfo(ShapeInfo shapeinfo) {
-        this.shapeinfo = shapeinfo;
-    }
 
 }

@@ -13,5 +13,4 @@ public interface IShape {
     void setFixedEnd(Point x);
     void modXYCoords(double x, double y);
     ShapeInfo getShapeInfo();
-    void setShapeInfo(ShapeInfo shapeinfo);
 }

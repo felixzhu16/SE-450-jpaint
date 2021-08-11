@@ -48,6 +48,7 @@ public class PaintCanvas extends PaintCanvasBase {
         super.paint(g);
         Graphics2D graphics2D = (Graphics2D) g;
         paintList(canvasShapes, selectShapes, graphics2D); //paints the list of shapes we have drawn
+        System.out.println("Size of select list when painting: " + shapelist.getSelectList().size());
         System.out.println("Time to repaint");
     }
 }

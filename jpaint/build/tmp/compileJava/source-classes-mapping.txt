@@ -10,21 +10,20 @@ controller/IUndoable.java
  controller.IUndoable
 view/gui/PaintCanvas.java
  view.gui.PaintCanvas
+view/interfaces/IDialogChoice.java
+ view.interfaces.IDialogChoice
 controller/CopyCommand.java
  controller.CopyCommand
 model/persistence/ApplicationState.java
  model.persistence.ApplicationState
-view/EventName.java
- view.EventName
- view.EventName$1
- view.EventName$2
- view.EventName$3
- view.EventName$4
- view.EventName$5
+controller/DrawShapeCommand.java
+ controller.DrawShapeCommand
 controller/ICommand.java
  controller.ICommand
-controller/IJPaintController.java
- controller.IJPaintController
+model/ShapeGroup.java
+ model.ShapeGroup
+controller/MouseListener.java
+ controller.MouseListener
 view/interfaces/IGuiWindow.java
  view.interfaces.IGuiWindow
 model/dialogs/ChoosePrimaryColorDialog.java
@@ -54,12 +53,14 @@ model/ShapeInfo.java
  model.ShapeInfo
 model/ShapeType.java
  model.ShapeType
-view/interfaces/IDialogChoice.java
- view.interfaces.IDialogChoice
+model/DrawShape.java
+ model.DrawShape
 model/Shapes/Rectangle.java
  model.Shapes.Rectangle
 model/interfaces/IShape.java
  model.interfaces.IShape
+controller/GroupCommand.java
+ controller.GroupCommand
 model/ShapeList.java
  model.ShapeList
 view/interfaces/IEventCallback.java
@@ -96,13 +97,18 @@ model/ShapeShadingType.java
  model.ShapeShadingType
 controller/CommandHistory.java
  controller.CommandHistory
-model/DrawShape.java
- model.DrawShape
-controller/DrawShapeCommand.java
- controller.DrawShapeCommand
-controller/MouseListener.java
- controller.MouseListener
+controller/IJPaintController.java
+ controller.IJPaintController
 controller/PasteCommand.java
  controller.PasteCommand
+view/EventName.java
+ view.EventName
+ view.EventName$1
+ view.EventName$2
+ view.EventName$3
+ view.EventName$4
+ view.EventName$5
+controller/UngroupCommand.java
+ controller.UngroupCommand
 controller/JPaintController.java
  controller.JPaintController

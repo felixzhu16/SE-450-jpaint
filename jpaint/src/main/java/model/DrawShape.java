@@ -23,13 +23,6 @@ public class DrawShape implements IShape {
         this.fixedend = end;
     }
 
-//
-//    public DrawShape(ShapeInfo shapeinfo, Point start, Point end){
-//        this.shapeinfo = shapeinfo;
-//        this.fixedstart = start;
-//        this.fixedend = end;
-//    }
-
 
     @Override
     public void draw(Graphics2D g) {
@@ -80,11 +73,6 @@ public class DrawShape implements IShape {
     @Override
     public ShapeInfo getShapeInfo() {
         return shapeinfo;
-    }
-
-    @Override
-    public void setShapeInfo(ShapeInfo shapeinfo) {
-        this.shapeinfo = shapeinfo;
     }
 
 }

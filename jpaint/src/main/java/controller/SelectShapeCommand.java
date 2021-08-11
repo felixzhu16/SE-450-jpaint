@@ -48,7 +48,7 @@ public class SelectShapeCommand implements ICommand{
 
     @Override
     public void run() {
-        shapeList.emptySelectedList();
+        shapeList.getSelectList().clear();
         fixCollisionStart();
         fixCollisionEnd();
         for(IShape shape : shapeList.getCurrList()){
@@ -59,7 +59,7 @@ public class SelectShapeCommand implements ICommand{
             }
         }
         if(!shapesSelected){
-            shapeList.emptySelectedList();
+            shapeList.getSelectList().clear();
             System.out.println("Emptying the selected shape list");
         }
     }

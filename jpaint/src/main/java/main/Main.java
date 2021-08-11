@@ -4,10 +4,7 @@ import controller.IJPaintController;
 import controller.JPaintController;
 import controller.KeyboardInterface;
 import controller.MouseListener;
-import model.ShapeColor;
-import model.ShapeInfo;
-import model.ShapeList;
-import model.ShapeType;
+import model.*;
 import model.persistence.ApplicationState;
 import view.gui.Gui;
 import view.gui.GuiWindow;
@@ -25,6 +22,7 @@ public class Main {
 
         ShapeList shapeList = new ShapeList();
         ShapeInfo shapeInfo = new ShapeInfo();
+        ShapeGroup shapeGroup = new ShapeGroup();
         PaintCanvasBase paintCanvas = new PaintCanvas(shapeList);
         IGuiWindow guiWindow = new GuiWindow(paintCanvas);
         IUiModule uiModule = new Gui(guiWindow);
@@ -34,7 +32,7 @@ public class Main {
         KeyboardInterface keys = new KeyboardInterface(paintCanvas, appState);
         keys.setup();
 
-        IJPaintController controller = new JPaintController(uiModule, appState, shapeList, paintCanvas, shapeInfo);
+        IJPaintController controller = new JPaintController(uiModule, appState, shapeList, paintCanvas, shapeInfo, shapeGroup);
         controller.setup();
 
 

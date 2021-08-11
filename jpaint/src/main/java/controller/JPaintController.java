@@ -12,13 +12,16 @@ public class JPaintController implements IJPaintController {
     private final ShapeList shapeList;
     private final PaintCanvasBase paintcanvas;
     private final ShapeInfo shapeInfo;
+    private final ShapeGroup shapeGroup;
 
-    public JPaintController(IUiModule uiModule, IApplicationState applicationState, ShapeList shapeList, PaintCanvasBase paintcanvas, ShapeInfo shapeInfo) {
+
+    public JPaintController(IUiModule uiModule, IApplicationState applicationState, ShapeList shapeList, PaintCanvasBase paintcanvas, ShapeInfo shapeInfo, ShapeGroup shapeGroup) {
         this.uiModule = uiModule;
         this.applicationState = applicationState;
         this.shapeList = shapeList;
         this.paintcanvas = paintcanvas;
         this.shapeInfo = shapeInfo;
+        this.shapeGroup = shapeGroup;
     }
 
     @Override
@@ -37,6 +40,8 @@ public class JPaintController implements IJPaintController {
         uiModule.addEvent(EventName.DELETE, () -> new DeleteCommand(shapeList, paintcanvas).run());
         uiModule.addEvent(EventName.COPY, () -> new CopyCommand(shapeList).run());
         uiModule.addEvent(EventName.PASTE, () -> new PasteCommand(shapeList, paintcanvas, applicationState).run());
+        uiModule.addEvent(EventName.GROUP, () -> new GroupCommand(shapeList, paintcanvas).run());
+        uiModule.addEvent(EventName.UNGROUP, () -> new UngroupCommand(shapeList, paintcanvas).run());
         //Add Undo, redo, copy, paste, delete, group, ungroup
     }
 }

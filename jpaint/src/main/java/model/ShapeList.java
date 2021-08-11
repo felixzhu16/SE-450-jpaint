@@ -10,10 +10,10 @@ public class ShapeList {
     public ArrayList<IShape> shapes;
     public ArrayList<IShape> removedShapes;
     public ArrayList<IShape> selectedShapes;
-    public int selectedShapeCount;
     public ArrayList<IShape> movedShapes;
     public ArrayList<IShape> deletedShapes;
     public ArrayList<IShape> copiedShapes;
+    public ArrayList<IShape> groupedShapes;
 
 
     public ShapeList() {
@@ -23,23 +23,11 @@ public class ShapeList {
         this.movedShapes = new ArrayList<IShape>();
         this.deletedShapes = new ArrayList<IShape>();
         this.copiedShapes = new ArrayList<IShape>();
-    }
-
-    public void setSelectShapeCount(int count){
-        this.selectedShapeCount = count;
-    }
-
-    public int getSShapeCount(){
-        return selectedShapeCount;
+        this.groupedShapes = new ArrayList<IShape>();
     }
 
     //shapes and removed shape list methods
-    public boolean contains(IShape shape){
-        if(shapes.contains(shape)){
-            return true;
-        }
-        return false;
-    }
+
     public void removeLast(){
         removedShapes.add(shapes.get(shapes.size()-1));
         shapes.remove(shapes.get(shapes.size()-1));
@@ -63,19 +51,7 @@ public class ShapeList {
     public void addSelectedShape(IShape shape){
         selectedShapes.add(shape);
     }
-    public void emptySelectedList(){
-        selectedShapes.clear();
-    }
 
-    public void moveShapetoMovedShapes(IShape shape){
-        shapes.remove(shape);
-        movedShapes.add(shape);
-    }
-
-    public void movedShapestoSList(IShape shape){
-        movedShapes.remove(shape);
-        shapes.add(shape);
-    }
 
     //Delete List methods
     public void addDeleteShape(IShape shape){
@@ -92,21 +68,15 @@ public class ShapeList {
         copiedShapes.add(shape);
     }
 
-
-    public void deleteShapeSelected(IShape shape){
-        selectedShapes.remove(shape);
-    }
-
     public void undoDelete(IShape shape){
         shapes.add(shape);
     }
 
-    public void undoDeleteShapeSelected(IShape shape){
-        selectedShapes.add(shape);
-    }
 
-    public void giveSList(ArrayList<IShape> list){
-        shapes = list;
+    //Grouped Methods
+
+    public void addGroup(IShape shape){
+        groupedShapes.add(shape);
     }
 
     public int size(){
@@ -117,6 +87,6 @@ public class ShapeList {
         return shapes;
     }
     public ArrayList<IShape> getSelectList(){return selectedShapes;}
-    public ArrayList<IShape> getMovedShapes(){return movedShapes;}
     public ArrayList<IShape> getCopiedList(){return copiedShapes;}
+    public ArrayList<IShape> getGroupList(){return groupedShapes;}
 }

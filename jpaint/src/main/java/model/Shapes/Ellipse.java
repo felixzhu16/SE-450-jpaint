@@ -92,10 +92,5 @@ public class Ellipse implements IShape {
         return shapeInfo;
     }
 
-    @Override
-    public void setShapeInfo(ShapeInfo shapeinfo) {
-        this.shapeInfo = shapeinfo;
-    }
-
 }
 

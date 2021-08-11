@@ -15,6 +15,7 @@ public class PasteCommand implements ICommand, IUndoable {
     IApplicationState appstate;
     Graphics2D g;
     ArrayList<IShape> tempPasteList;
+
     public PasteCommand(ShapeList shapelist, PaintCanvasBase paintcanvas, IApplicationState appstate){
         this.shapelist = shapelist;
         this.paintcanvas = paintcanvas;
