@@ -27,7 +27,6 @@ public class PaintCanvas extends PaintCanvasBase {
 
     public void paintList(ArrayList<IShape> list, ArrayList<IShape> selectlist,Graphics2D g){
         if(list != null){
-            System.out.println("Size of shape list when painting: " + list.size());
             for(IShape x : list){
                 if(selectlist.contains(x)){
                     x = new DrawDash(x);
@@ -48,7 +47,6 @@ public class PaintCanvas extends PaintCanvasBase {
         super.paint(g);
         Graphics2D graphics2D = (Graphics2D) g;
         paintList(canvasShapes, selectShapes, graphics2D); //paints the list of shapes we have drawn
-        System.out.println("Size of select list when painting: " + shapelist.getSelectList().size());
         System.out.println("Time to repaint");
     }
 }

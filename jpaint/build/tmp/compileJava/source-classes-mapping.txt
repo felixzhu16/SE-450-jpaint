@@ -8,8 +8,8 @@ model/dialogs/ChooseShadingTypeDialog.java
  model.dialogs.ChooseShadingTypeDialog
 controller/IUndoable.java
  controller.IUndoable
-view/gui/PaintCanvas.java
- view.gui.PaintCanvas
+controller/PasteCommand.java
+ controller.PasteCommand
 view/interfaces/IDialogChoice.java
  view.interfaces.IDialogChoice
 controller/CopyCommand.java
@@ -43,8 +43,13 @@ controller/KeyboardInterface.java
  controller.KeyboardInterface$1
 model/Shapes/Ellipse.java
  model.Shapes.Ellipse
-main/Main.java
- main.Main
+view/EventName.java
+ view.EventName
+ view.EventName$1
+ view.EventName$2
+ view.EventName$3
+ view.EventName$4
+ view.EventName$5
 model/Undo.java
  model.Undo
 controller/UndoCommand.java
@@ -99,16 +104,11 @@ controller/CommandHistory.java
  controller.CommandHistory
 controller/IJPaintController.java
  controller.IJPaintController
-controller/PasteCommand.java
- controller.PasteCommand
-view/EventName.java
- view.EventName
- view.EventName$1
- view.EventName$2
- view.EventName$3
- view.EventName$4
- view.EventName$5
+view/gui/PaintCanvas.java
+ view.gui.PaintCanvas
 controller/UngroupCommand.java
  controller.UngroupCommand
+main/Main.java
+ main.Main
 controller/JPaintController.java
  controller.JPaintController

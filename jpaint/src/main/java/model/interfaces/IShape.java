@@ -12,5 +12,7 @@ public interface IShape {
     void setFixedStart(Point x);
     void setFixedEnd(Point x);
     void modXYCoords(double x, double y);
+    IShape paste();
+    void ungroup(ArrayList<IShape> current, ArrayList<IShape> selected, ArrayList<IShape> temp);
     ShapeInfo getShapeInfo();
 }

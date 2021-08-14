@@ -26,12 +26,7 @@ public class PasteCommand implements ICommand, IUndoable {
     @Override
     public void run() {
         for(IShape shape: shapelist.getCopiedList()){
-            Point incStart = new Point();
-            Point incEnd = new Point();
-            incStart.setLocation(shape.getFixedStart().getX() + 20, shape.getFixedStart().getY() + 20);
-            incEnd.setLocation(shape.getFixedEnd().getX() + 20, shape.getFixedEnd().getY() + 20);
-            copyShape = new DrawShape(incStart, incEnd, shape.getShapeInfo().getPrimColor(), shape.getShapeInfo().getSecColor(),
-                        shape.getShapeInfo().getShapeType(), shape.getShapeInfo().getShadingType());
+            copyShape = shape.paste();
             tempPasteList.add(copyShape);
             shapelist.addShape(copyShape);
         }

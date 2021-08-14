@@ -6,6 +6,7 @@ import model.Shapes.Triangle;
 import model.interfaces.IShape;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class DrawShape implements IShape {
     ShapeInfo shapeinfo;
@@ -68,6 +69,24 @@ public class DrawShape implements IShape {
     public void modXYCoords(double x, double y) {
         fixedstart.setLocation(fixedstart.getX() + x, fixedstart.getY() + y);
         fixedend.setLocation(fixedend.getX() + x, fixedend.getY() + y);
+    }
+
+    @Override
+    public IShape paste() {
+        Point incStart = new Point();
+        Point incEnd = new Point();
+        incStart.setLocation(getFixedStart().getX() + 20, getFixedStart().getY() + 20);
+        incEnd.setLocation(getFixedEnd().getX() + 20, getFixedEnd().getY() + 20);
+        IShape cShape = new DrawShape(incStart, incEnd, getShapeInfo().getPrimColor(), getShapeInfo().getSecColor(),
+                getShapeInfo().getShapeType(), getShapeInfo().getShadingType());
+        return cShape;
+    }
+
+    @Override
+    public void ungroup(ArrayList<IShape> current, ArrayList<IShape> selected, ArrayList<IShape> temp) {
+        current.add(this);
+        selected.add(this);
+        temp.add(this);
     }
 
     @Override

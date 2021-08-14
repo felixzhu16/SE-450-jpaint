@@ -6,6 +6,7 @@ import java.awt.*;
 
 public interface IApplicationState {
     void setActiveShape(ShapeType type);
+    void setActiveShape();
 
     void setActivePrimaryColor();
 
@@ -13,7 +14,11 @@ public interface IApplicationState {
 
     void setActiveShadingType(ShapeShadingType type);
 
+    void setActiveShadingType();
+
     void setActiveStartAndEndPointMode(MouseMode mode);
+
+    void setActiveStartAndEndPointMode();
 
     void setStart(Point start);
 

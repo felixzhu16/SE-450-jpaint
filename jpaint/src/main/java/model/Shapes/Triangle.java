@@ -1,12 +1,10 @@
 package model.Shapes;
 
-import model.ShapeColorTranslator;
-import model.ShapeInfo;
-import model.ShapeShadingType;
-import model.ShapeType;
+import model.*;
 import model.interfaces.IShape;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Triangle implements IShape {
     private ShapeInfo shapeInfo;
@@ -68,6 +66,17 @@ public class Triangle implements IShape {
         fixedend.setLocation(fixedend.getX() + x, fixedend.getY() + y);
     }
 
+    @Override
+    public IShape paste() {
+        Point incStart = new Point();
+        Point incEnd = new Point();
+        incStart.setLocation(getFixedStart().getX() + 20, getFixedStart().getY() + 20);
+        incEnd.setLocation(getFixedEnd().getX() + 20, getFixedEnd().getY() + 20);
+        IShape cShape = new DrawShape(incStart, incEnd, getShapeInfo().getPrimColor(), getShapeInfo().getSecColor(),
+                getShapeInfo().getShapeType(), getShapeInfo().getShadingType());
+        return cShape;
+    }
+
     public void draw(Graphics2D g){
         x[0] = (int) fixedstart.getX();
         y[0] = (int) fixedstart.getY();
@@ -83,23 +92,29 @@ public class Triangle implements IShape {
 
         }
         else if(shadingType.equals(ShapeShadingType.OUTLINE_AND_FILLED_IN)){
-            g.setColor(primColor);
+            g.setColor(secColor);
             g.setStroke(new BasicStroke(3));
             g.drawPolygon(x,y, 3);
-            g.setColor(secColor);
+            g.setColor(primColor);
             g.fillPolygon(x,y, 3);
         }
         else if(shadingType.equals(ShapeShadingType.FILLED_IN)){
-            g.setColor(secColor);
+            g.setColor(primColor);
             g.fillPolygon(x,y, 3);
         }
 
+    }
+
+    @Override
+    public void ungroup(ArrayList<IShape> current, ArrayList<IShape> selected, ArrayList<IShape> temp) {
+        current.add(this);
+        selected.add(this);
+        temp.add(this);
     }
 
     public ShapeInfo getShapeInfo(){
         return shapeInfo;
     }
-
 
 
 }

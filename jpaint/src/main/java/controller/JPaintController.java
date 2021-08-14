@@ -30,11 +30,11 @@ public class JPaintController implements IJPaintController {
     }
 
     private void setupEvents() {
-       // uiModule.addEvent(EventName.CHOOSE_SHAPE, () -> applicationState.setActiveShape((ShapeType) type));
+        uiModule.addEvent(EventName.CHOOSE_SHAPE, () -> applicationState.setActiveShape());
         uiModule.addEvent(EventName.CHOOSE_PRIMARY_COLOR, () -> applicationState.setActivePrimaryColor());
         uiModule.addEvent(EventName.CHOOSE_SECONDARY_COLOR, () -> applicationState.setActiveSecondaryColor());
-       // uiModule.addEvent(EventName.CHOOSE_SHADING_TYPE, () -> applicationState.setActiveShadingType((ShapeShadingType) type));
-       // uiModule.addEvent(EventName.CHOOSE_MOUSE_MODE, () -> applicationState.setActiveStartAndEndPointMode((MouseMode) mode));
+        uiModule.addEvent(EventName.CHOOSE_SHADING_TYPE, () -> applicationState.setActiveShadingType());
+        uiModule.addEvent(EventName.CHOOSE_MOUSE_MODE, () -> applicationState.setActiveStartAndEndPointMode());
         uiModule.addEvent(EventName.UNDO, () -> new UndoCommand(shapeList,paintcanvas).run());
         uiModule.addEvent(EventName.REDO, () -> new RedoCommand(shapeList, paintcanvas).run());
         uiModule.addEvent(EventName.DELETE, () -> new DeleteCommand(shapeList, paintcanvas).run());

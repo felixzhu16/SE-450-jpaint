@@ -11,13 +11,13 @@ public class UngroupCommand implements ICommand, IUndoable{
     private ShapeList shapelist;
     private PaintCanvasBase paintcanvas;
     private ArrayList<IShape> tempselect;
-    private ShapeGroup shapeGroup;
+    private ArrayList<IShape> tempUngrouped;
 
     public UngroupCommand(ShapeList shapelist, PaintCanvasBase paintcanvas){
         this.shapelist = shapelist;
         this.paintcanvas = paintcanvas;
         this.tempselect = new ArrayList<IShape>();
-        this.shapeGroup = new ShapeGroup();
+        this.tempUngrouped = new ArrayList<IShape>();
 
     }
 
@@ -32,39 +32,28 @@ public class UngroupCommand implements ICommand, IUndoable{
         shapelist.getCurrList().removeAll(shapelist.getSelectList());
         copySelected();
         for(IShape s: tempselect){
-            if(s instanceof ShapeGroup){
-                for(IShape b : ((ShapeGroup) s).getGroup()){
-                    shapelist.getCurrList().add(b);
-                    shapelist.getSelectList().add(b);
-                }
-                shapelist.getSelectList().remove(s);
-            }
-            else{
-                shapelist.getCurrList().add(s);
-                shapelist.getSelectList().add(s);
-            }
+            s.ungroup(shapelist.getCurrList(),shapelist.getSelectList(), tempUngrouped);
+            CommandHistory.add(this);
         }
-        CommandHistory.add(this);
         paintcanvas.repaint();
     }
 
     @Override
     public void undo() {
-        tempselect.clear();
-        copySelected();
-        shapeGroup.group(tempselect);
-        shapelist.getCurrList().removeAll(shapelist.getSelectList());
-        shapelist.getCurrList().add(shapeGroup);
-        shapelist.getSelectList().clear();
-        shapelist.getSelectList().add(shapeGroup);
+        shapelist.getCurrList().removeAll(tempUngrouped);
+        shapelist.getSelectList().removeAll(tempUngrouped);
+        for(IShape s: tempselect){
+            shapelist.getCurrList().add(s);
+            shapelist.getSelectList().add(s);
+        }
         paintcanvas.repaint();
     }
 
     @Override
     public void redo() {
-        shapelist.getCurrList().remove(shapeGroup);
-        shapelist.getSelectList().remove(shapeGroup);
-        for(IShape s : shapeGroup.getGroup()){
+        shapelist.getCurrList().removeAll(tempselect);
+        shapelist.getSelectList().removeAll(tempselect);
+        for(IShape s : tempUngrouped){
             shapelist.getCurrList().add(s);
             shapelist.getSelectList().add(s);
         }
