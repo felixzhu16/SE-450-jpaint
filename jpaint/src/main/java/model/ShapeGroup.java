@@ -116,7 +116,7 @@ public class ShapeGroup implements IShape {
                     s.getShapeInfo().getShapeType(), s.getShapeInfo().getShadingType());
             copy.getGroup().add(cShape);
         }
-        copy.setShapeInfo(groupedShapes);
+        copy.setShapeInfo(copy.groupedShapes);
         return copy;
     }
 

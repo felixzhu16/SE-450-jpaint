@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class PasteCommand implements ICommand, IUndoable {
     ShapeList shapelist;
-    IShape copyShape;
     PaintCanvasBase paintcanvas;
     IApplicationState appstate;
     Graphics2D g;
@@ -26,7 +25,7 @@ public class PasteCommand implements ICommand, IUndoable {
     @Override
     public void run() {
         for(IShape shape: shapelist.getCopiedList()){
-            copyShape = shape.paste();
+            IShape copyShape = shape.paste();
             tempPasteList.add(copyShape);
             shapelist.addShape(copyShape);
         }
