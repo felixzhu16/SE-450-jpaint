@@ -20,8 +20,8 @@ controller/DrawShapeCommand.java
  controller.DrawShapeCommand
 controller/ICommand.java
  controller.ICommand
-model/ShapeGroup.java
- model.ShapeGroup
+controller/UngroupCommand.java
+ controller.UngroupCommand
 controller/MouseListener.java
  controller.MouseListener
 view/interfaces/IGuiWindow.java
@@ -64,8 +64,8 @@ model/Shapes/Rectangle.java
  model.Shapes.Rectangle
 model/interfaces/IShape.java
  model.interfaces.IShape
-controller/GroupCommand.java
- controller.GroupCommand
+view/gui/PaintCanvas.java
+ view.gui.PaintCanvas
 model/ShapeList.java
  model.ShapeList
 view/interfaces/IEventCallback.java
@@ -104,11 +104,14 @@ controller/CommandHistory.java
  controller.CommandHistory
 controller/IJPaintController.java
  controller.IJPaintController
-view/gui/PaintCanvas.java
- view.gui.PaintCanvas
-controller/UngroupCommand.java
- controller.UngroupCommand
+model/interfaces/IShapeGroupIterator.java
+ model.interfaces.IShapeGroupIterator
+model/ShapeGroup.java
+ model.ShapeGroup
+ model.ShapeGroup$ShapeGroupIterator
 main/Main.java
  main.Main
 controller/JPaintController.java
  controller.JPaintController
+controller/GroupCommand.java
+ controller.GroupCommand

@@ -1,6 +1,7 @@
 package model;
 
 import model.interfaces.IShape;
+import model.interfaces.IShapeGroupIterator;
 import model.persistence.ApplicationState;
 
 import java.awt.*;
@@ -8,7 +9,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class ShapeGroup implements IShape {
+public class ShapeGroup implements IShape{
     private ArrayList<IShape> groupedShapes;
     private Point fixedStart, fixedEnd;
     private ShapeInfo shapeInfo;
@@ -21,10 +22,10 @@ public class ShapeGroup implements IShape {
     }
 
     public void group(ArrayList<IShape> selected){
-        if(selected != null){
-            for(IShape s : selected){
-                groupedShapes.add(s);
-            }
+        ShapeGroupIterator iterator = new ShapeGroupIterator(selected);
+        while(iterator.hasNext()){
+            iterator.getNext();
+            groupedShapes.add(iterator.currShape);
         }
         setShapeInfo(groupedShapes);
     }
@@ -122,10 +123,12 @@ public class ShapeGroup implements IShape {
 
     @Override
     public void ungroup(ArrayList<IShape> current, ArrayList<IShape> selected, ArrayList<IShape> temp) {
-        for(IShape s : groupedShapes){
-            current.add(s);
-            selected.add(s);
-            temp.add(s);
+        ShapeGroupIterator iterator = new ShapeGroupIterator(groupedShapes);
+        while(iterator.hasNext()){
+            iterator.getNext();
+            current.add(iterator.currShape);
+            selected.add(iterator.currShape);
+            temp.add(iterator.currShape);
         }
         current.remove(this);
         selected.remove(this);
@@ -136,4 +139,32 @@ public class ShapeGroup implements IShape {
         return shapeInfo;
     }
 
+    class ShapeGroupIterator implements IShapeGroupIterator{
+        private ArrayList<IShape> list;
+        private IShape currShape;
+        private int i;
+
+        ShapeGroupIterator(ArrayList<IShape> list) {
+            this.list = list;
+            this.currShape = list.get(0);
+            this.i = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            if(i >= list.size() || list.get(i) == null){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+
+        @Override
+        public IShape getNext() {
+            currShape = list.get(i);
+            i++;
+            return currShape;
+        }
+    }
 }
