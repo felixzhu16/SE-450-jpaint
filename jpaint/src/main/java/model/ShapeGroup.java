@@ -152,7 +152,7 @@ public class ShapeGroup implements IShape{
 
         @Override
         public boolean hasNext() {
-            if(i >= list.size() || list.get(i) == null){
+            if(i > list.size()-1 || list.get(i) == null){
                 return false;
             }
             else{

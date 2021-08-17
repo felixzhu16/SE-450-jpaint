@@ -13,7 +13,6 @@ public class ShapeList {
     public ArrayList<IShape> movedShapes;
     public ArrayList<IShape> deletedShapes;
     public ArrayList<IShape> copiedShapes;
-    public ArrayList<IShape> groupedShapes;
 
 
     public ShapeList() {
@@ -23,7 +22,6 @@ public class ShapeList {
         this.movedShapes = new ArrayList<IShape>();
         this.deletedShapes = new ArrayList<IShape>();
         this.copiedShapes = new ArrayList<IShape>();
-        this.groupedShapes = new ArrayList<IShape>();
     }
 
     //shapes and removed shape list methods
@@ -58,7 +56,6 @@ public class ShapeList {
         deletedShapes.add(shape);
     }
     public void deleteShape(IShape shape){
-        System.out.println("DELETE SHAPE METHOD");
         shapes.remove(shape);
     }
 
@@ -67,17 +64,10 @@ public class ShapeList {
     public void addCopyShape(IShape shape){
         copiedShapes.add(shape);
     }
-
     public void undoDelete(IShape shape){
         shapes.add(shape);
     }
 
-
-    //Grouped Methods
-
-    public void addGroup(IShape shape){
-        groupedShapes.add(shape);
-    }
 
     public int size(){
         return shapes.size();
@@ -88,5 +78,4 @@ public class ShapeList {
     }
     public ArrayList<IShape> getSelectList(){return selectedShapes;}
     public ArrayList<IShape> getCopiedList(){return copiedShapes;}
-    public ArrayList<IShape> getGroupList(){return groupedShapes;}
 }
