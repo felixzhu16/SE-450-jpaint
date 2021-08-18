@@ -43,8 +43,8 @@ public class UngroupCommand implements ICommand, IUndoable{
         shapelist.getCurrList().removeAll(tempUngrouped);
         shapelist.getSelectList().removeAll(tempUngrouped);
         for(IShape s: tempselect){
-            shapelist.getCurrList().add(s);
-            shapelist.getSelectList().add(s);
+            shapelist.add(s);
+            shapelist.addSelectedShape(s);
         }
         paintcanvas.repaint();
     }
@@ -54,8 +54,8 @@ public class UngroupCommand implements ICommand, IUndoable{
         shapelist.getCurrList().removeAll(tempselect);
         shapelist.getSelectList().removeAll(tempselect);
         for(IShape s : tempUngrouped){
-            shapelist.getCurrList().add(s);
-            shapelist.getSelectList().add(s);
+            shapelist.add(s);
+            shapelist.addSelectedShape(s);
         }
         paintcanvas.repaint();
     }

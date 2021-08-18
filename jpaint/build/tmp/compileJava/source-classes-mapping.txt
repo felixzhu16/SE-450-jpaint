@@ -8,10 +8,10 @@ model/dialogs/ChooseShadingTypeDialog.java
  model.dialogs.ChooseShadingTypeDialog
 controller/IUndoable.java
  controller.IUndoable
-controller/PasteCommand.java
- controller.PasteCommand
-view/interfaces/IDialogChoice.java
- view.interfaces.IDialogChoice
+view/gui/PaintCanvas.java
+ view.gui.PaintCanvas
+controller/UngroupCommand.java
+ controller.UngroupCommand
 controller/CopyCommand.java
  controller.CopyCommand
 model/persistence/ApplicationState.java
@@ -20,8 +20,11 @@ controller/DrawShapeCommand.java
  controller.DrawShapeCommand
 controller/ICommand.java
  controller.ICommand
-controller/UngroupCommand.java
- controller.UngroupCommand
+model/ShapeGroup.java
+ model.ShapeGroup
+ model.ShapeGroup$ShapeGroupIterator
+model/interfaces/ICollection.java
+ model.interfaces.ICollection
 controller/MouseListener.java
  controller.MouseListener
 view/interfaces/IGuiWindow.java
@@ -43,13 +46,8 @@ controller/KeyboardInterface.java
  controller.KeyboardInterface$1
 model/Shapes/Ellipse.java
  model.Shapes.Ellipse
-view/EventName.java
- view.EventName
- view.EventName$1
- view.EventName$2
- view.EventName$3
- view.EventName$4
- view.EventName$5
+main/Main.java
+ main.Main
 model/Undo.java
  model.Undo
 controller/UndoCommand.java
@@ -64,10 +62,12 @@ model/Shapes/Rectangle.java
  model.Shapes.Rectangle
 model/interfaces/IShape.java
  model.interfaces.IShape
-view/gui/PaintCanvas.java
- view.gui.PaintCanvas
+controller/GroupCommand.java
+ controller.GroupCommand
 model/ShapeList.java
  model.ShapeList
+model/interfaces/IShapeGroupIterator.java
+ model.interfaces.IShapeGroupIterator
 view/interfaces/IEventCallback.java
  view.interfaces.IEventCallback
 view/interfaces/IUiModule.java
@@ -104,14 +104,16 @@ controller/CommandHistory.java
  controller.CommandHistory
 controller/IJPaintController.java
  controller.IJPaintController
-model/interfaces/IShapeGroupIterator.java
- model.interfaces.IShapeGroupIterator
-model/ShapeGroup.java
- model.ShapeGroup
- model.ShapeGroup$ShapeGroupIterator
-main/Main.java
- main.Main
+controller/PasteCommand.java
+ controller.PasteCommand
 controller/JPaintController.java
  controller.JPaintController
-controller/GroupCommand.java
- controller.GroupCommand
+view/EventName.java
+ view.EventName
+ view.EventName$1
+ view.EventName$2
+ view.EventName$3
+ view.EventName$4
+ view.EventName$5
+view/interfaces/IDialogChoice.java
+ view.interfaces.IDialogChoice

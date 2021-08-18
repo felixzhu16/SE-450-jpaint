@@ -1,31 +1,25 @@
 package model;
 
+import model.interfaces.ICollection;
 import model.interfaces.IShape;
 import model.interfaces.IShapeGroupIterator;
-import model.persistence.ApplicationState;
 
 import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Iterator;
 
-public class ShapeGroup implements IShape{
+public class ShapeGroup implements IShape, ICollection{
     private ArrayList<IShape> groupedShapes;
     private Point fixedStart, fixedEnd;
     private ShapeInfo shapeInfo;
-    private ArrayList<IShape> ungroupedShapes;
 
     public ShapeGroup(){
         this.groupedShapes = new ArrayList<IShape>();
         this.shapeInfo = new ShapeInfo();
-        this.ungroupedShapes = new ArrayList<IShape>();
     }
 
     public void group(ArrayList<IShape> selected){
-        ShapeGroupIterator iterator = new ShapeGroupIterator(selected);
-        while(iterator.hasNext()){
-            iterator.getNext();
-            groupedShapes.add(iterator.currShape);
+        for(IShape s : selected){
+            groupedShapes.add(s);
         }
         setShapeInfo(groupedShapes);
     }
@@ -33,7 +27,6 @@ public class ShapeGroup implements IShape{
     public ArrayList<IShape> getGroup(){
         return groupedShapes;
     }
-    public ArrayList<IShape> getUngrouped(){return ungroupedShapes;}
 
     public void setShapeInfo(ArrayList<IShape> list){
         calcFixedStart(list);
@@ -70,8 +63,10 @@ public class ShapeGroup implements IShape{
 
     @Override
     public void draw(Graphics2D g) {
-        for(IShape s : groupedShapes){
-            s.draw(g);
+        ShapeGroupIterator iterator = createIterator();
+        while(iterator.hasNext()){
+            iterator.getNext();
+            iterator.currShape.draw(g);
         }
     }
 
@@ -107,14 +102,16 @@ public class ShapeGroup implements IShape{
     @Override
     public IShape paste() {
         ShapeGroup copy = new ShapeGroup();
-        for(IShape s: groupedShapes){
+        ShapeGroupIterator iterator = createIterator();
+        while(iterator.hasNext()){
+            iterator.getNext();
             Point incStart = new Point();
             Point incEnd = new Point();
             IShape cShape;
-            incStart.setLocation(s.getFixedStart().getX() + 20, s.getFixedStart().getY() + 20);
-            incEnd.setLocation(s.getFixedEnd().getX() + 20, s.getFixedEnd().getY() + 20);
-            cShape = new DrawShape(incStart, incEnd, s.getShapeInfo().getPrimColor(), s.getShapeInfo().getSecColor(),
-                    s.getShapeInfo().getShapeType(), s.getShapeInfo().getShadingType());
+            incStart.setLocation(iterator.currShape.getFixedStart().getX() + 20, iterator.currShape.getFixedStart().getY() + 20);
+            incEnd.setLocation(iterator.currShape.getFixedEnd().getX() + 20, iterator.currShape.getFixedEnd().getY() + 20);
+            cShape = new DrawShape(incStart, incEnd,iterator.currShape.getShapeInfo().getPrimColor(), iterator.currShape.getShapeInfo().getSecColor(),
+                    iterator.currShape.getShapeInfo().getShapeType(), iterator.currShape.getShapeInfo().getShadingType());
             copy.getGroup().add(cShape);
         }
         copy.setShapeInfo(copy.groupedShapes);
@@ -123,7 +120,7 @@ public class ShapeGroup implements IShape{
 
     @Override
     public void ungroup(ArrayList<IShape> current, ArrayList<IShape> selected, ArrayList<IShape> temp) {
-        ShapeGroupIterator iterator = new ShapeGroupIterator(groupedShapes);
+        ShapeGroupIterator iterator = createIterator();
         while(iterator.hasNext()){
             iterator.getNext();
             current.add(iterator.currShape);
@@ -139,13 +136,19 @@ public class ShapeGroup implements IShape{
         return shapeInfo;
     }
 
-    class ShapeGroupIterator implements IShapeGroupIterator{
+    @Override
+    public ShapeGroupIterator createIterator() {
+        return new ShapeGroupIterator();
+    }
+
+
+    public class ShapeGroupIterator implements IShapeGroupIterator{
         private ArrayList<IShape> list;
         private IShape currShape;
         private int i;
 
-        ShapeGroupIterator(ArrayList<IShape> list) {
-            this.list = list;
+        ShapeGroupIterator() {
+            this.list = groupedShapes;
             this.currShape = list.get(0);
             this.i = 0;
         }

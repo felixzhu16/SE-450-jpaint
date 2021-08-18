@@ -24,9 +24,9 @@ public class GroupCommand implements ICommand, IUndoable{
             shapeList.addSelectedShape(shapeGroup);
             //Removing all grouped shapes from the current list
             for(IShape shape: shapeGroup.getGroup()){
-                shapeList.getCurrList().remove(shape);
+                shapeList.remove(shape);
             }
-            shapeList.getCurrList().add(shapeGroup);
+            shapeList.add(shapeGroup);
             CommandHistory.add(this);
             paintcanvas.repaint();
         }
@@ -36,11 +36,11 @@ public class GroupCommand implements ICommand, IUndoable{
     public void undo() {
         shapeList.getSelectList().clear();
         for(IShape s : shapeGroup.getGroup()){
-            shapeList.getCurrList().add(s);
-            shapeList.getSelectList().add(s);
+            shapeList.add(s);
+            shapeList.addSelectedShape(s);
         }
-        shapeList.getCurrList().remove(shapeGroup);
-        shapeList.getSelectList().remove(shapeGroup);
+        shapeList.remove(shapeGroup);
+        shapeList.removeSelectedShape(shapeGroup);
         paintcanvas.repaint();
     }
 
@@ -49,9 +49,9 @@ public class GroupCommand implements ICommand, IUndoable{
         shapeList.getSelectList().clear();
         shapeList.addSelectedShape(shapeGroup);
         for(IShape shape: shapeGroup.getGroup()){
-            shapeList.getCurrList().remove(shape);
+            shapeList.remove(shape);
         }
-        shapeList.getCurrList().add(shapeGroup);
+        shapeList.add(shapeGroup);
         paintcanvas.repaint();
     }
 }

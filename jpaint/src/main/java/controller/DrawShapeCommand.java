@@ -45,10 +45,6 @@ public class DrawShapeCommand implements ICommand, IUndoable{
         CommandHistory.add(this);
     }
 
-    public IShape getShape(){
-        return shape;
-    }
-
     @Override
     public void undo() {
         shapelist.removeLast();

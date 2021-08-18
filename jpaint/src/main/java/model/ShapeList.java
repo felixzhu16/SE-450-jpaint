@@ -25,6 +25,13 @@ public class ShapeList {
     }
 
     //shapes and removed shape list methods
+    public void add(IShape shape){
+        shapes.add(shape);
+    }
+
+    public void remove(IShape shape){
+        shapes.remove(shape);
+    }
 
     public void removeLast(){
         removedShapes.add(shapes.get(shapes.size()-1));
@@ -48,6 +55,9 @@ public class ShapeList {
     //Selected shape methods
     public void addSelectedShape(IShape shape){
         selectedShapes.add(shape);
+    }
+    public void removeSelectedShape(IShape shape){
+        selectedShapes.remove(shape);
     }
 
 
