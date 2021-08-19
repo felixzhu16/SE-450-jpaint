@@ -105,14 +105,21 @@ public class ShapeGroup implements IShape, ICollection{
         ShapeGroupIterator iterator = createIterator();
         while(iterator.hasNext()){
             iterator.getNext();
-            Point incStart = new Point();
-            Point incEnd = new Point();
-            IShape cShape;
-            incStart.setLocation(iterator.currShape.getFixedStart().getX() + 20, iterator.currShape.getFixedStart().getY() + 20);
-            incEnd.setLocation(iterator.currShape.getFixedEnd().getX() + 20, iterator.currShape.getFixedEnd().getY() + 20);
-            cShape = new DrawShape(incStart, incEnd,iterator.currShape.getShapeInfo().getPrimColor(), iterator.currShape.getShapeInfo().getSecColor(),
-                    iterator.currShape.getShapeInfo().getShapeType(), iterator.currShape.getShapeInfo().getShadingType());
-            copy.getGroup().add(cShape);
+            if(iterator.currShape instanceof ShapeGroup){
+               IShape copyGroup;
+               copyGroup = iterator.currShape.paste();
+               copy.getGroup().add(copyGroup);
+            }
+            else{
+                Point incStart = new Point();
+                Point incEnd = new Point();
+                IShape cShape;
+                incStart.setLocation(iterator.currShape.getFixedStart().getX() + 20, iterator.currShape.getFixedStart().getY() + 20);
+                incEnd.setLocation(iterator.currShape.getFixedEnd().getX() + 20, iterator.currShape.getFixedEnd().getY() + 20);
+                cShape = new DrawShape(incStart, incEnd,iterator.currShape.getShapeInfo().getPrimColor(), iterator.currShape.getShapeInfo().getSecColor(),
+                        iterator.currShape.getShapeInfo().getShapeType(), iterator.currShape.getShapeInfo().getShadingType());
+                copy.getGroup().add(cShape);
+            }
         }
         copy.setShapeInfo(copy.groupedShapes);
         return copy;
